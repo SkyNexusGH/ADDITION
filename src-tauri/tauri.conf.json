@@ -1,0 +1,47 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "ADDITION",
+  "version": "0.1.0",
+  "identifier": "io.addition.app",
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "ADDITION",
+        "width": 1280,
+        "height": 800,
+        "minWidth": 1024,
+        "minHeight": 640,
+        "decorations": true,
+        "transparent": false,
+        "fullscreen": false,
+        "resizable": true,
+        "center": true,
+        "backgroundColor": "#080c14"
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "category": "Utility",
+    "shortDescription": "Free, open-source desktop game manager",
+    "longDescription": "ADDITION is a free, open-source desktop game manager that detects games across Steam, Epic, GOG, Ubisoft, EA, Xbox, and Rockstar. Browse mods, install trainers, and manage your library — all from one app."
+  },
+  "plugins": {}
+}

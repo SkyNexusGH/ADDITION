@@ -1,0 +1,25 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
+
+# Editors
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Tauri
+src-tauri/target/
+src-tauri/gen/
+# Cargo.lock IS committed for binary applications (this one).
+
+# Environment
+.env
+.env.local
+.env.*.local

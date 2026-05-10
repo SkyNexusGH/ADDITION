@@ -1,0 +1,22 @@
+.shell {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  height: 100vh;
+  background: var(--bg-base);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 500px at 75% -10%, rgba(59, 130, 246, 0.06), transparent 70%),
+    var(--bg-base);
+}
+
+.content {
+  flex: 1;
+  overflow: auto;
+  padding: var(--space-6) var(--space-8);
+}

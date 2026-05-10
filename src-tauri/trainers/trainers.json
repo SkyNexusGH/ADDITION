@@ -1,0 +1,265 @@
+{
+  "version": 1,
+  "updated": "2026-05-10",
+  "trainers": [
+    {
+      "id": "fling-cyberpunk2077",
+      "game": "Cyberpunk 2077",
+      "trainer": "FLiNG Trainer +27",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/cyberpunk-2077-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Stamina",
+        "Unlimited Oxygen",
+        "Damage Multiplier",
+        "Set Money",
+        "Set Street Cred Points",
+        "Set Attribute Points",
+        "Set Perk Points",
+        "Set Reputation",
+        "Item Quantity"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-12-12"
+    },
+    {
+      "id": "fling-eldenring",
+      "game": "ELDEN RING",
+      "trainer": "FLiNG Trainer +20",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/elden-ring-trainer/",
+      "features": [
+        "Unlimited HP",
+        "Unlimited FP",
+        "Unlimited Stamina",
+        "Set Runes",
+        "Edit Stats",
+        "One Hit Kill",
+        "Game Speed"
+      ],
+      "anticheat_risk": true,
+      "single_player_only": true,
+      "last_updated": "2025-08-17"
+    },
+    {
+      "id": "fling-baldursgate3",
+      "game": "Baldur's Gate 3",
+      "trainer": "FLiNG Trainer +24",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/baldurs-gate-3-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Action Points",
+        "Unlimited Bonus Actions",
+        "Unlimited Movement",
+        "Set Gold",
+        "Add Experience",
+        "Edit Stats"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-10-04"
+    },
+    {
+      "id": "wemod-no-mans-sky",
+      "game": "No Man's Sky",
+      "trainer": "MrAntiFun Trainer",
+      "source": "MrAntiFun",
+      "url": "https://mrantifun.net/threads/no-mans-sky-trainer.13037/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Shield",
+        "Unlimited Jetpack",
+        "Unlimited Hazard Protection",
+        "Unlimited Units"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-11-22"
+    },
+    {
+      "id": "fling-stardewvalley",
+      "game": "Stardew Valley",
+      "trainer": "FLiNG Trainer +9",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/stardew-valley-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Stamina",
+        "Set Money",
+        "Edit Skill Levels",
+        "Set Time"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-05-10"
+    },
+    {
+      "id": "fling-thewitcher3",
+      "game": "The Witcher 3 Wild Hunt",
+      "trainer": "FLiNG Trainer +27",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/the-witcher-3-wild-hunt-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Stamina",
+        "Unlimited Toxicity",
+        "Set Gold",
+        "Set Experience"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-04-22"
+    },
+    {
+      "id": "fling-skyrim-se",
+      "game": "Skyrim Special Edition",
+      "trainer": "FLiNG Trainer +12",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/the-elder-scrolls-v-skyrim-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Stamina",
+        "Unlimited Magicka",
+        "Set Gold",
+        "Add Skill Levels",
+        "Item Carry Weight"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-09-30"
+    },
+    {
+      "id": "fling-fallout4",
+      "game": "Fallout 4",
+      "trainer": "FLiNG Trainer +20",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/fallout-4-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited AP",
+        "Set Caps",
+        "Set XP",
+        "S.P.E.C.I.A.L. Editor"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-04-25"
+    },
+    {
+      "id": "fling-gtav",
+      "game": "Grand Theft Auto V",
+      "trainer": "FLiNG Trainer +14",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/grand-theft-auto-v-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Armor",
+        "Unlimited Ammo",
+        "Set Money",
+        "Set Player Level"
+      ],
+      "anticheat_risk": true,
+      "single_player_only": true,
+      "last_updated": "2025-12-15"
+    },
+    {
+      "id": "fling-rdr2",
+      "game": "Red Dead Redemption 2",
+      "trainer": "FLiNG Trainer +28",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/red-dead-redemption-2-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Stamina",
+        "Unlimited Dead Eye",
+        "Unlimited Money",
+        "Set Honor"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-11-08"
+    },
+    {
+      "id": "fling-monsterhunter-world",
+      "game": "Monster Hunter World",
+      "trainer": "FLiNG Trainer +20",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/monster-hunter-world-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Stamina",
+        "Unlimited Sharpness",
+        "Set Zenny",
+        "Damage Multiplier"
+      ],
+      "anticheat_risk": true,
+      "single_player_only": true,
+      "last_updated": "2025-06-15"
+    },
+    {
+      "id": "fling-helldivers2",
+      "game": "Helldivers 2",
+      "trainer": "[no public trainer — anti-cheat]",
+      "source": "ADDITION",
+      "url": "https://github.com/addition-app/trainers#helldivers-2",
+      "features": [],
+      "anticheat_risk": true,
+      "single_player_only": false,
+      "last_updated": "2026-01-01"
+    },
+    {
+      "id": "fling-civ6",
+      "game": "Sid Meier's Civilization VI",
+      "trainer": "FLiNG Trainer +13",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/sid-meier-s-civilization-vi-trainer/",
+      "features": [
+        "Add Gold",
+        "Add Faith",
+        "Add Science",
+        "Add Culture",
+        "Add Population"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-03-12"
+    },
+    {
+      "id": "fling-hogwartslegacy",
+      "game": "Hogwarts Legacy",
+      "trainer": "FLiNG Trainer +21",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/hogwarts-legacy-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited Mana",
+        "Set Gold",
+        "Set Talent Points",
+        "Set Field Guide Pages"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-07-01"
+    },
+    {
+      "id": "fling-starfield",
+      "game": "Starfield",
+      "trainer": "FLiNG Trainer +24",
+      "source": "FLiNG",
+      "url": "https://flingtrainer.com/trainer/starfield-trainer/",
+      "features": [
+        "Unlimited Health",
+        "Unlimited O2",
+        "Unlimited CO2",
+        "Set Credits",
+        "Add Skill Points"
+      ],
+      "anticheat_risk": false,
+      "single_player_only": true,
+      "last_updated": "2025-09-18"
+    }
+  ]
+}

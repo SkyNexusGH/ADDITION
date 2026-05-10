@@ -1,0 +1,117 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+  transition: transform var(--transition);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 600 / 900;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+  transition: box-shadow var(--transition), outline-color var(--transition);
+  outline: 1px solid transparent;
+}
+
+.card:hover .cover {
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.65),
+    0 0 32px rgba(59, 130, 246, 0.45),
+    0 0 0 1px rgba(96, 165, 250, 0.4) inset;
+  outline-color: rgba(96, 165, 250, 0.6);
+}
+
+.cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(220px 220px at 50% 30%, rgba(59, 130, 246, 0.18), transparent 70%),
+    linear-gradient(135deg, #0d1220 0%, #1a2540 100%);
+  position: relative;
+}
+
+.placeholder span {
+  font-size: 72px;
+  font-weight: 900;
+  color: var(--accent-bright);
+  text-shadow: 0 0 32px rgba(59, 130, 246, 0.6);
+  letter-spacing: 0.04em;
+}
+
+.gradient {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 50%;
+  background: linear-gradient(to top, rgba(8, 12, 20, 0.85), transparent);
+  pointer-events: none;
+}
+
+.topRow {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  gap: 4px;
+}
+
+.pills {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(8, 12, 20, 0.75);
+  color: var(--accent-bright);
+  backdrop-filter: blur(6px);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border: 1px solid rgba(96, 165, 250, 0.25);
+}
+
+.trainer {
+  color: var(--success);
+  border-color: rgba(34, 197, 94, 0.4);
+}
+
+.title {
+  margin-top: var(--space-3);
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
