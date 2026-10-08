@@ -3,9 +3,8 @@
 
 use crate::db;
 use crate::error::{AppError, AppResult};
-use crate::mods;
 use crate::scanner;
-use crate::types::{BackupEntry, DetectedGame, InstalledMod};
+use crate::types::DetectedGame;
 use std::path::PathBuf;
 use tauri::AppHandle;
 
@@ -78,83 +77,6 @@ pub async fn launch_game(
 }
 
 #[tauri::command]
-pub async fn install_mod(
-    app: AppHandle,
-    game_id: String,
-    target_dir: String,
-    mod_name: String,
-    version: String,
-    source: String,
-    url: String,
-) -> AppResult<InstalledMod> {
-    let app_data = db::app_data_dir(&app)
-        .ok_or_else(|| AppError::Other("could not resolve app data dir".into()))?;
-    mods::install_from_url(
-        &app_data,
-        &game_id,
-        std::path::Path::new(&target_dir),
-        &mod_name,
-        &version,
-        &source,
-        &url,
-    )
-    .await
-}
-
-#[tauri::command]
-pub fn uninstall_mod(
-    app: AppHandle,
-    game_id: String,
-    target_dir: String,
-    backup_id: String,
-) -> AppResult<()> {
-    let app_data = db::app_data_dir(&app)
-        .ok_or_else(|| AppError::Other("could not resolve app data dir".into()))?;
-    mods::uninstall(
-        &app_data,
-        &game_id,
-        std::path::Path::new(&target_dir),
-        &backup_id,
-    )?;
-    Ok(())
-}
-
-#[tauri::command]
-pub fn list_installed_mods(_game_id: String) -> AppResult<Vec<InstalledMod>> {
-    // Frontend reads via tauri-plugin-sql.
-    Ok(vec![])
-}
-
-#[tauri::command]
-pub fn list_backups(app: AppHandle, game_id: String) -> AppResult<Vec<BackupEntry>> {
-    let app_data = db::app_data_dir(&app)
-        .ok_or_else(|| AppError::Other("could not resolve app data dir".into()))?;
-    mods::list_backups_for(&app_data, &game_id)
-}
-
-#[tauri::command]
-pub fn restore_backup(
-    app: AppHandle,
-    game_id: String,
-    target_dir: String,
-    backup_id: String,
-) -> AppResult<()> {
-    let app_data = db::app_data_dir(&app)
-        .ok_or_else(|| AppError::Other("could not resolve app data dir".into()))?;
-    mods::backup::restore(
-        &app_data,
-        &game_id,
-        &backup_id,
-        std::path::Path::new(&target_dir),
-    )
-}
-
-#[tauri::command]
-pub async fn list_trainers(game_name: String) -> AppResult<Vec<crate::trainers::TrainerEntry>> {
-    crate::trainers::list_for_game(&game_name).await
-}
-
-#[tauri::command]
 pub async fn open_path(app: AppHandle, path: String) -> AppResult<()> {
     use tauri_plugin_shell::ShellExt;
     app.shell()
@@ -170,22 +92,6 @@ pub async fn fetch_cover_art(
     app_id: Option<String>,
 ) -> AppResult<Option<String>> {
     crate::cover::resolve(&name, &launcher, app_id.as_deref()).await
-}
-
-#[tauri::command]
-pub async fn search_curseforge_mods(
-    game_name: String,
-    api_key: String,
-) -> AppResult<Vec<crate::mods::ModListing>> {
-    crate::mods::search_curseforge(&game_name, &api_key).await
-}
-
-#[tauri::command]
-pub async fn search_nexus_mods(
-    game_name: String,
-    api_key: String,
-) -> AppResult<Vec<crate::mods::ModListing>> {
-    crate::mods::search_nexus(&game_name, &api_key).await
 }
 
 #[tauri::command]

@@ -16,8 +16,6 @@ export default function LibraryPage() {
     query,
     filterLauncher,
     setFilterLauncher,
-    filterModded,
-    setFilterModded,
     view,
     setView,
     rescan,
@@ -35,7 +33,7 @@ export default function LibraryPage() {
       if (q && !fuzzy(g.name.toLowerCase(), q)) return false;
       return true;
     });
-  }, [games, query, filterLauncher, filterModded]);
+  }, [games, query, filterLauncher]);
 
   const onAddManual = async () => {
     const dir = await openDialog({ directory: true, multiple: false });

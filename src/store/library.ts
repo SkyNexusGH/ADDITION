@@ -32,7 +32,6 @@ interface LibraryState {
   fetchingCovers: boolean;
   query: string;
   filterLauncher: Launcher | null;
-  filterModded: boolean;
   view: "grid" | "list";
 
   load: () => Promise<void>;
@@ -40,7 +39,6 @@ interface LibraryState {
   refreshCovers: (force?: boolean) => Promise<void>;
   setQuery: (q: string) => void;
   setFilterLauncher: (l: Launcher | null) => void;
-  setFilterModded: (m: boolean) => void;
   setView: (v: "grid" | "list") => void;
   removeGame: (id: string) => Promise<void>;
 }
@@ -52,7 +50,6 @@ export const useLibrary = create<LibraryState>((set, get) => ({
   fetchingCovers: false,
   query: "",
   filterLauncher: null,
-  filterModded: false,
   view: "grid",
 
   async load() {
@@ -144,7 +141,6 @@ export const useLibrary = create<LibraryState>((set, get) => ({
 
   setQuery: (query) => set({ query }),
   setFilterLauncher: (l) => set({ filterLauncher: l }),
-  setFilterModded: (m) => set({ filterModded: m }),
   setView: (v) => set({ view: v }),
 
   async removeGame(id: string) {

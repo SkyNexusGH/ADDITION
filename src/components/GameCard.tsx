@@ -6,11 +6,10 @@ import styles from "./GameCard.module.css";
 
 interface Props {
   game: GameRow;
-  modCount?: number;
   hasTrainer?: boolean;
 }
 
-export default function GameCard({ game, modCount = 0, hasTrainer = false }: Props) {
+export default function GameCard({ game, hasTrainer = false }: Props) {
   const navigate = useNavigate();
   const initial = game.name.trim().charAt(0).toUpperCase() || "?";
 
@@ -33,11 +32,6 @@ export default function GameCard({ game, modCount = 0, hasTrainer = false }: Pro
           <LauncherBadge launcher={game.launcher as Launcher} />
         </div>
         <div className={styles.pills}>
-          {modCount > 0 && (
-            <span className={styles.pill}>
-              {modCount} mod{modCount === 1 ? "" : "s"}
-            </span>
-          )}
           {hasTrainer && <span className={`${styles.pill} ${styles.trainer}`}>Trainer</span>}
         </div>
       </div>

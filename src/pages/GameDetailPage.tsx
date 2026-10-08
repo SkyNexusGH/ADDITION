@@ -3,9 +3,6 @@ import { useParams, useNavigate, Routes, Route, NavLink, Navigate } from "react-
 import { dbq, GameRow } from "../api/db";
 import { api, Launcher } from "../api/tauri";
 import LauncherBadge from "../components/LauncherBadge";
-import ModsTab from "./tabs/ModsTab";
-import TrainersTab from "./tabs/TrainersTab";
-import InstalledTab from "./tabs/InstalledTab";
 import GameSettingsTab from "./tabs/GameSettingsTab";
 import { useToast } from "../store/toast";
 import styles from "./GameDetailPage.module.css";
@@ -86,9 +83,6 @@ export default function GameDetailPage() {
 
       <div className={styles.tabs}>
         {[
-          { to: "mods", label: "Mods" },
-          { to: "trainers", label: "Trainers" },
-          { to: "installed", label: "Installed" },
           { to: "settings", label: "Settings" },
         ].map((t) => (
           <NavLink
@@ -105,10 +99,7 @@ export default function GameDetailPage() {
 
       <div className={styles.tabContent}>
         <Routes>
-          <Route path="/" element={<Navigate to="mods" replace />} />
-          <Route path="mods" element={<ModsTab game={game} />} />
-          <Route path="trainers" element={<TrainersTab game={game} />} />
-          <Route path="installed" element={<InstalledTab game={game} />} />
+          <Route path="/" element={<Navigate to="settings" replace />} />
           <Route path="settings" element={<GameSettingsTab game={game} />} />
         </Routes>
       </div>

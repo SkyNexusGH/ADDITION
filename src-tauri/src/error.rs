@@ -17,11 +17,7 @@ pub enum AppError {
     #[error("network error: {0}")]
     Network(#[from] reqwest::Error),
 
-    #[error("zip error: {0}")]
-    Zip(#[from] zip::result::ZipError),
 
-    #[error("walk error: {0}")]
-    Walk(#[from] walkdir::Error),
 
     #[error("tauri error: {0}")]
     Tauri(#[from] tauri::Error),

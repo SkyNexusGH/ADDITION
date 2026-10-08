@@ -36,27 +36,3 @@ pub struct DetectedGame {
     pub exe_path: Option<String>,
     pub app_id: Option<String>,
 }
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct InstalledMod {
-    pub id: String,
-    pub game_id: String,
-    pub name: String,
-    pub version: String,
-    pub source: String,
-    pub size_bytes: u64,
-    pub enabled: bool,
-    pub installed_at: String,
-    pub backup_id: Option<String>,
-}
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
-pub struct BackupEntry {
-    pub id: String,
-    pub game_id: String,
-    pub created_at: String,
-    pub size_bytes: u64,
-    pub path: String,
-    pub note: String,
-}
-
