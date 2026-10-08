@@ -115,6 +115,7 @@ fn trainer_json() -> String {
   "schema": 1,
   "id": "test-game",
   "game": "ADDITION Test Game",
+  "aliases": ["Test Game"],
   "process": ["test-game.exe", "test-game"],
   "game_version": "this build",
   "author": "ADDITION",

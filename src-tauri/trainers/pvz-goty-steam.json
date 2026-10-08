@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "id": "pvz-goty-steam",
+  "game": "Plants vs. Zombies",
+  "aliases": ["Plants vs. Zombies: Game of the Year", "Plants vs. Zombies GOTY Edition"],
+  "process": ["popcapgame1.exe"],
+  "game_version": "Steam GOTY (1.2.0.1096)",
+  "author": "ADDITION, from widely published community addresses",
+  "notes": "Not yet confirmed on a real install. The Steam launcher (PlantsVsZombies.exe) starts the actual game as popcapgame1.exe, which is what this attaches to. Sun is only there during a level. If a cheat shows an error or does nothing, find Sun again with the Scanner tab (docs/first-trainer.md) and save the new path over this one.",
+  "verified": false,
+  "cheats": [
+    {
+      "id": "sun",
+      "name": "Set Sun",
+      "description": "Only works while you're in a level.",
+      "kind": "set",
+      "type": "i32",
+      "min": 0,
+      "max": 9990,
+      "default": 9990,
+      "hotkey": "F1",
+      "target": { "module": "popcapgame1.exe", "base": "0x355E0C", "offsets": ["0x868", "0x5578"] }
+    },
+    {
+      "id": "sun_lock",
+      "name": "Unlimited Sun",
+      "description": "Keeps Sun at 9990 while you're in a level.",
+      "kind": "freeze",
+      "type": "i32",
+      "value": 9990,
+      "hotkey": "F2",
+      "target": { "module": "popcapgame1.exe", "base": "0x355E0C", "offsets": ["0x868", "0x5578"] }
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { open as openDialog } from "@tauri-apps/plugin-dialog";
 import GameCard from "../components/GameCard";
 import LauncherBadge from "../components/LauncherBadge";
@@ -25,6 +25,15 @@ export default function LibraryPage() {
     load,
   } = useLibrary();
   const push = useToast((s) => s.push);
+  const [withTrainer, setWithTrainer] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    if (!games.length) return;
+    api
+      .gamesWithTrainers(games.map((g) => ({ id: g.id, name: g.name, exe_path: g.exe_path })))
+      .then((ids) => setWithTrainer(new Set(ids)))
+      .catch(() => {});
+  }, [games]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -129,7 +138,7 @@ export default function LibraryPage() {
       ) : view === "grid" ? (
         <div className={styles.grid}>
           {filtered.map((g) => (
-            <GameCard key={g.id} game={g} />
+            <GameCard key={g.id} game={g} hasTrainer={withTrainer.has(g.id)} />
           ))}
         </div>
       ) : (

@@ -23,6 +23,9 @@ pub enum AppError {
     Tauri(#[from] tauri::Error),
 
     #[error("{0}")]
+    Engine(#[from] addition_engine::EngineError),
+
+    #[error("{0}")]
     Other(String),
 }
 

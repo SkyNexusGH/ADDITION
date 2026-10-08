@@ -51,8 +51,8 @@ impl ScanControl {
         if self.cancel.load(Ordering::Relaxed) {
             return Err(EngineError::Cancelled);
         }
-        if total > 0 {
-            self.progress.store(((done * 1000) / total) as u32, Ordering::Relaxed);
+        if let Some(p) = (done * 1000).checked_div(total) {
+            self.progress.store(p as u32, Ordering::Relaxed);
         }
         Ok(())
     }

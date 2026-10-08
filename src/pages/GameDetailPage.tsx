@@ -4,6 +4,8 @@ import { dbq, GameRow } from "../api/db";
 import { api, Launcher } from "../api/tauri";
 import LauncherBadge from "../components/LauncherBadge";
 import GameSettingsTab from "./tabs/GameSettingsTab";
+import TrainerTab from "./tabs/TrainerTab";
+import ScannerTab from "./tabs/ScannerTab";
 import { useToast } from "../store/toast";
 import styles from "./GameDetailPage.module.css";
 
@@ -83,6 +85,8 @@ export default function GameDetailPage() {
 
       <div className={styles.tabs}>
         {[
+          { to: "trainer", label: "Trainer" },
+          { to: "scanner", label: "Scanner" },
           { to: "settings", label: "Settings" },
         ].map((t) => (
           <NavLink
@@ -99,7 +103,9 @@ export default function GameDetailPage() {
 
       <div className={styles.tabContent}>
         <Routes>
-          <Route path="/" element={<Navigate to="settings" replace />} />
+          <Route path="/" element={<Navigate to="trainer" replace />} />
+          <Route path="trainer" element={<TrainerTab game={game} />} />
+          <Route path="scanner" element={<ScannerTab game={game} />} />
           <Route path="settings" element={<GameSettingsTab game={game} />} />
         </Routes>
       </div>

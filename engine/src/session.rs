@@ -13,11 +13,14 @@ use serde::Serialize;
 use std::collections::HashMap;
 use std::sync::Arc;
 
-/// Finds a running process by executable name (case-insensitive).
+/// Finds a running process by executable name (case-insensitive). Earlier
+/// names win, so a trainer can list the real game before its launcher.
 pub fn find_process(names: &[String]) -> Result<Option<ProcessInfo>> {
-    Ok(sys::list_processes()?
-        .into_iter()
-        .find(|p| names.iter().any(|n| n.eq_ignore_ascii_case(&p.name))))
+    let procs = sys::list_processes()?;
+    Ok(names
+        .iter()
+        .find_map(|n| procs.iter().find(|p| n.eq_ignore_ascii_case(&p.name)))
+        .cloned())
 }
 
 pub fn list_processes() -> Result<Vec<ProcessInfo>> {

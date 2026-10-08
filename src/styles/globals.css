@@ -28,6 +28,7 @@
 }
 
 :root {
+  color-scheme: dark;
   --bg-base:        #080c14;
   --bg-surface:     #0d1220;
   --bg-elevated:    #111827;

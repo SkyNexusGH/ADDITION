@@ -47,201 +47,6 @@
   line-height: 1.6;
 }
 
-.modToolbar {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.searchInput {
-  flex: 1;
-  padding: 9px 14px;
-}
-
-/* Mod list rows (WeMod-style) ------------------------------------------- */
-
-.modRows {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.modRow {
-  display: grid;
-  grid-template-columns: 64px 1fr auto;
-  gap: var(--space-4);
-  padding: var(--space-3);
-  align-items: center;
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  transition: all var(--transition);
-}
-
-.modRow:hover {
-  border-color: var(--accent-primary);
-  background: rgba(59, 130, 246, 0.04);
-  box-shadow: 0 0 24px rgba(59, 130, 246, 0.08);
-}
-
-.modRowInstalled {
-  border-color: rgba(34, 197, 94, 0.3);
-  background: rgba(34, 197, 94, 0.04);
-}
-
-.modThumbSm {
-  width: 64px;
-  height: 64px;
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  background: var(--bg-elevated);
-}
-
-.modThumbSm img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.thumbFallback {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-  color: var(--accent-glow);
-  font-weight: 900;
-  font-size: 22px;
-}
-
-.modInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
-.modTitleLine {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.modTitleLine h4 {
-  margin: 0;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sourceBadge {
-  padding: 2px 7px;
-  border-radius: 999px;
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: 1px solid;
-}
-
-.src_curseforge {
-  color: #fb923c;
-  background: rgba(251, 146, 60, 0.1);
-  border-color: rgba(251, 146, 60, 0.3);
-}
-
-.src_nexus {
-  color: #c084fc;
-  background: rgba(192, 132, 252, 0.1);
-  border-color: rgba(192, 132, 252, 0.3);
-}
-
-.modDescLine {
-  margin: 0;
-  font-size: 12px;
-  color: var(--text-secondary);
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  line-height: 1.5;
-}
-
-.modMetaLine {
-  display: flex;
-  gap: 4px;
-  color: var(--text-dim);
-  font-size: 11px;
-  font-weight: 400;
-  margin-top: 2px;
-}
-
-.dot {
-  color: var(--text-dim);
-}
-
-.modAction {
-  display: flex;
-  gap: var(--space-2);
-  align-items: center;
-}
-
-.installBtn {
-  padding: 8px 16px;
-  border-radius: var(--radius-sm);
-  font-weight: 700;
-  font-size: 12px;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  background: var(--accent-primary);
-  color: #fff;
-  transition: all var(--transition);
-  border: 1px solid var(--accent-primary);
-}
-
-.installBtn:hover:not(:disabled) {
-  background: var(--accent-glow);
-  box-shadow: 0 0 16px rgba(59, 130, 246, 0.4);
-}
-
-.installBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.installedTag {
-  padding: 8px 14px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--success);
-  background: rgba(34, 197, 94, 0.08);
-  border: 1px solid rgba(34, 197, 94, 0.3);
-}
-
-.linkBtn {
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
-  background: var(--bg-elevated);
-  color: var(--text-secondary);
-  border: 1px solid var(--border);
-  font-size: 14px;
-  transition: all var(--transition);
-}
-
-.linkBtn:hover {
-  border-color: var(--accent-primary);
-  color: var(--accent-bright);
-  background: rgba(59, 130, 246, 0.08);
-}
-
-/* Trainer cards --------------------------------------------------------- */
-
 .disclaimer {
   padding: var(--space-3) var(--space-4);
   background: rgba(245, 158, 11, 0.08);
@@ -258,80 +63,6 @@
   color: var(--danger);
 }
 
-.trainerList {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-3);
-}
-
-.trainerCard {
-  padding: var(--space-4);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  transition: all var(--transition);
-}
-
-.trainerCard:hover {
-  border-color: var(--accent-primary);
-}
-
-.trainerHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: var(--space-3);
-  margin-bottom: var(--space-3);
-}
-
-.trainerHeader h4 {
-  margin: 0 0 2px;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.trainerMeta {
-  display: flex;
-  gap: 6px;
-  font-size: 11px;
-  color: var(--text-dim);
-}
-
-.warnBadge {
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 700;
-  background: rgba(245, 158, 11, 0.12);
-  color: var(--warning);
-  border: 1px solid rgba(245, 158, 11, 0.3);
-  white-space: nowrap;
-}
-
-.featureList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 4px 12px;
-  list-style: none;
-  padding: 0;
-  margin: 0 0 var(--space-3) 0;
-  color: var(--text-secondary);
-  font-size: 13px;
-}
-
-.featureList li::before {
-  content: "✓ ";
-  color: var(--success);
-  font-weight: 700;
-}
-
-.trainerActions {
-  display: flex;
-  gap: var(--space-2);
-}
-
-/* Installed tab --------------------------------------------------------- */
-
 .sectionTitle {
   margin: 0 0 var(--space-3);
   font-weight: 900;
@@ -339,32 +70,10 @@
   letter-spacing: 0.02em;
 }
 
-.installedList {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.installedRow {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: var(--space-3);
-  align-items: center;
-  padding: var(--space-3) var(--space-4);
-  background: var(--bg-surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-
-.installedName {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  min-width: 0;
-}
-
 .toggle {
   position: relative;
+  display: inline-block;
+  flex-shrink: 0;
   width: 36px;
   height: 20px;
   cursor: pointer;
@@ -427,4 +136,290 @@
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+/* Trainer tab ------------------------------------------------------------ */
+
+.statusBar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.phase_waiting .statusDot {
+  background: var(--warning);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+.phase_attached .statusDot {
+  background: var(--success);
+  box-shadow: 0 0 10px var(--success);
+}
+
+.phase_blocked .statusDot,
+.phase_error .statusDot {
+  background: var(--danger);
+}
+
+@keyframes pulse {
+  50% { opacity: 0.35; }
+}
+
+.statusText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.statusText strong {
+  font-size: 14px;
+}
+
+.statusText span {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.trainerPicker {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.cheatList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cheatRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-4);
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition);
+}
+
+.cheatRow.on {
+  border-color: rgba(59, 130, 246, 0.5);
+  box-shadow: inset 3px 0 0 var(--accent-primary);
+}
+
+.disabled {
+  opacity: 0.55;
+}
+
+.cheatInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.cheatName {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 700;
+}
+
+.cheatDesc {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.cheatError {
+  font-size: 12px;
+  color: var(--danger);
+}
+
+.cheatControls {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.cheatControls input[type="number"] {
+  width: 110px;
+}
+
+.cheatControls input[type="range"] {
+  width: 140px;
+  padding: 0;
+  accent-color: var(--accent-primary);
+}
+
+.key {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  color: var(--text-secondary);
+}
+
+.liveValue {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 12px;
+  color: var(--text-secondary);
+  min-width: 60px;
+  text-align: right;
+}
+
+/* Scanner tab ------------------------------------------------------------ */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.grow {
+  flex: 1;
+  min-width: 160px;
+}
+
+.scanGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+@media (min-width: 1700px) {
+  .scanGrid {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: flex-end;
+  white-space: nowrap;
+}
+
+.progress {
+  height: 4px;
+  background: var(--bg-elevated);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress div {
+  height: 100%;
+  background: var(--accent-primary);
+  transition: width 120ms linear;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.table td {
+  padding: 4px 8px;
+  border-bottom: 1px solid rgba(26, 37, 64, 0.5);
+  vertical-align: middle;
+}
+
+.table tr:hover td {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.mono {
+  font-family: ui-monospace, "Cascadia Code", monospace;
+  font-size: 12px;
+  word-break: break-all;
+}
+
+.tableWrap {
+  max-height: 360px;
+  overflow: auto;
+}
+
+.small {
+  padding: 3px 10px;
+  font-size: 12px;
+}
+
+.steps {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.dialog {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.dialogBody {
+  width: min(520px, 92vw);
+  max-height: 90vh;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-5);
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.dialogBody h3 {
+  margin: 0;
 }

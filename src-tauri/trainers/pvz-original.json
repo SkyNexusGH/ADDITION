@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "id": "pvz-original",
+  "game": "Plants vs. Zombies",
+  "aliases": ["Plants vs. Zombies: Game of the Year", "Plants vs. Zombies GOTY Edition"],
+  "process": ["PlantsVsZombies.exe"],
+  "game_version": "Original PopCap release (1.0.0.1051)",
+  "author": "ADDITION, from widely published community addresses",
+  "notes": "Not yet confirmed on a real install. This is the classic non-Steam release, which runs as PlantsVsZombies.exe. Sun is only there during a level. If a cheat shows an error or does nothing, find the value again with the Scanner tab (docs/first-trainer.md) and save the new path over this one.",
+  "verified": false,
+  "cheats": [
+    {
+      "id": "sun",
+      "name": "Set Sun",
+      "description": "Only works while you're in a level.",
+      "kind": "set",
+      "type": "i32",
+      "min": 0,
+      "max": 9990,
+      "default": 9990,
+      "hotkey": "F1",
+      "target": { "module": "PlantsVsZombies.exe", "base": "0x2A9EC0", "offsets": ["0x768", "0x5560"] }
+    },
+    {
+      "id": "sun_lock",
+      "name": "Unlimited Sun",
+      "description": "Keeps Sun at 9990 while you're in a level.",
+      "kind": "freeze",
+      "type": "i32",
+      "value": 9990,
+      "hotkey": "F2",
+      "target": { "module": "PlantsVsZombies.exe", "base": "0x2A9EC0", "offsets": ["0x768", "0x5560"] }
+    },
+    {
+      "id": "coins",
+      "name": "Set Coins",
+      "description": "Stored as one tenth of what the game shows: 5000 here is $50,000.",
+      "kind": "set",
+      "type": "i32",
+      "min": 0,
+      "max": 99999,
+      "default": 5000,
+      "hotkey": "F3",
+      "target": { "module": "PlantsVsZombies.exe", "base": "0x2A9EC0", "offsets": ["0x82C", "0x28"] }
+    }
+  ]
+}
