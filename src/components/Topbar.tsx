@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useLibrary } from "../store/library";
 import { useToast } from "../store/toast";
+import Icon from "./Icon";
 import styles from "./Topbar.module.css";
 
 export default function Topbar() {
@@ -11,33 +12,37 @@ export default function Topbar() {
 
   const onRescan = async () => {
     const { added } = await rescan();
-    push(`Scan complete — ${added} new ${added === 1 ? "game" : "games"} added`, "success");
+    push(`Scan finished: ${added} new ${added === 1 ? "game" : "games"}`, "success");
   };
 
   return (
-    <div className={styles.topbar}>
-      <div className={styles.search}>
-        <span className={styles.searchIcon}>⌕</span>
+    <header className={styles.topbar}>
+      <label className={styles.search}>
+        <Icon name="search" />
         <input
-          type="text"
-          placeholder="Search your library…"
+          type="search"
+          placeholder="Search your games"
+          aria-label="Search your games"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-      </div>
+      </label>
 
       <div className={styles.actions}>
-        <button className="btn" onClick={onRescan} disabled={scanning}>
-          {scanning ? "Scanning…" : "Rescan Library"}
+        <button className="ag-btn" onClick={onRescan} disabled={scanning}>
+          <Icon name="refresh" />
+          {scanning ? "Scanning" : "Rescan"}
         </button>
         <button
-          className="btn btn-ghost"
+          className={`ag-icon-btn ${styles.bell}`}
           onClick={() => navigate("/notifications")}
+          aria-label={history.length ? `Notifications, ${history.length} new` : "Notifications"}
           title="Notifications"
         >
-          ◐ {history.length > 0 ? <span className={styles.dot} /> : null}
+          <Icon name="bell" />
+          {history.length > 0 && <span className={styles.dot} />}
         </button>
       </div>
-    </div>
+    </header>
   );
 }

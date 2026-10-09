@@ -16,7 +16,8 @@ import {
 } from "../../api/tauri";
 import { useScanner, WatchEntry } from "../../store/scanner";
 import { useToast } from "../../store/toast";
-import { Toggle } from "./TrainerTab";
+import { OnOff } from "./TrainerTab";
+import Icon from "../../components/Icon";
 import styles from "./Tabs.module.css";
 
 type FilterKind = ScanFilter["kind"];
@@ -64,7 +65,7 @@ export default function ScannerTab({ game }: { game: GameRow }) {
   }, [s.pid]);
 
   return (
-    <div className={styles.tab}>
+    <div className={`${styles.tab} ${styles.canvas} ag-canvas`}>
       <ProcessPicker game={game} onError={setError} />
       {error && <code className={styles.error}>{error}</code>}
 
@@ -75,7 +76,7 @@ export default function ScannerTab({ game }: { game: GameRow }) {
         </div>
       ) : (
         <div className={styles.panel}>
-          <h3 className={styles.sectionTitle}>How making a cheat works</h3>
+          <h3 className="title">How making a cheat works</h3>
           <ol className={styles.steps}>
             <li>Start the game and pick its process above.</li>
             <li>Search for a number you can see, like your health (say it's 100).</li>
@@ -83,7 +84,7 @@ export default function ScannerTab({ game }: { game: GameRow }) {
             <li>Add the address to your list and test it: change the value or freeze it.</li>
             <li>
               Click <strong>Pointers</strong> so the cheat still works after a restart, then <strong>Save as cheat</strong>.
-              It shows up in the Trainer tab with a toggle and hotkey.
+              It shows up in the Trainer tab with an Off/On switch and a hotkey.
             </li>
           </ol>
         </div>
@@ -140,14 +141,14 @@ function ProcessPicker({ game, onError }: { game: GameRow; onError: (e: string |
 
   if (s.pid) {
     return (
-      <div className={styles.statusBar + " " + styles.phase_attached}>
-        <span className={styles.statusDot} />
+      <div className={`${styles.statusBar} ${styles.statusLive}`}>
+        <span className="ag-chip ag-chip--live">Live</span>
         <div className={styles.statusText}>
           <strong>Scanning {s.processName}</strong>
           <span>Process {s.pid}</span>
         </div>
         <button
-          className="btn"
+          className="ag-btn"
           onClick={async () => {
             await api.scanClose();
             s.set({ pid: null, processName: null, summary: null, pointers: null });
@@ -162,19 +163,20 @@ function ProcessPicker({ game, onError }: { game: GameRow; onError: (e: string |
   return (
     <div className={styles.panel}>
       <div className={styles.row}>
-        <input placeholder="Filter processes…" value={filter} onChange={(e) => setFilter(e.target.value)} />
+        <input placeholder="Filter processes" aria-label="Filter processes" value={filter} onChange={(e) => setFilter(e.target.value)} />
         <select className={styles.grow} value={pick} onChange={(e) => setPick(Number(e.target.value))}>
           <option value="">{procs.length ? "Choose the game's process" : "No processes found"}</option>
           {shown.map((p) => (
             <option key={p.pid} value={p.pid}>
-              {p.name} ({p.pid}){p.pid === suggested?.pid ? " ★ this game" : ""}
+              {p.name} ({p.pid}){p.pid === suggested?.pid ? " (this game)" : ""}
             </option>
           ))}
         </select>
-        <button className="btn" onClick={refresh}>
+        <button className="ag-btn" onClick={refresh}>
+          <Icon name="refresh" />
           Refresh
         </button>
-        <button className="btn btn-primary" disabled={pick === ""} onClick={attach}>
+        <button className="ag-btn ag-btn--primary" disabled={pick === ""} onClick={attach}>
           Attach
         </button>
       </div>
@@ -233,7 +235,7 @@ function ScanPanel({ push }: { push: (m: string, v?: any) => void }) {
 
   return (
     <div className={styles.panel}>
-      <h3 className={styles.sectionTitle}>Find a value</h3>
+      <h3 className="title">Find a value</h3>
       <div className={styles.row}>
         <select
           value={s.valueType}
@@ -266,12 +268,13 @@ function ScanPanel({ push }: { push: (m: string, v?: any) => void }) {
         )}
       </div>
       <div className={styles.row}>
-        <button className="btn btn-primary" disabled={busy || (needsValue && !value.trim())} onClick={run}>
+        <button className="ag-btn ag-btn--primary" disabled={busy || (needsValue && !value.trim())} onClick={run}>
+          <Icon name="search" />
           {first ? "First scan" : "Next scan"}
         </button>
         {!first && (
           <button
-            className="btn"
+            className="ag-btn"
             disabled={busy}
             onClick={async () => {
               await api.scanReset();
@@ -282,7 +285,7 @@ function ScanPanel({ push }: { push: (m: string, v?: any) => void }) {
           </button>
         )}
         {busy && (
-          <button className="btn btn-ghost" onClick={() => api.scanCancel()}>
+          <button className="ag-btn ag-btn--ghost" onClick={() => api.scanCancel()}>
             Cancel
           </button>
         )}
@@ -319,7 +322,7 @@ function ScanPanel({ push }: { push: (m: string, v?: any) => void }) {
                   </td>
                   <td className={styles.mono}>{h.value}</td>
                   <td>
-                    <button className={`btn ${styles.small}`} onClick={() => addHit(i)}>
+                    <button className="ag-btn ag-btn--sm" onClick={() => addHit(i)}>
                       Add
                     </button>
                   </td>
@@ -399,7 +402,7 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
 
   return (
     <div className={styles.panel}>
-      <h3 className={styles.sectionTitle}>Your addresses</h3>
+      <h3 className="title">Your addresses</h3>
       {s.watch.length === 0 ? (
         <span className={styles.muted}>Add results from the search to test them here.</span>
       ) : (
@@ -410,7 +413,7 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
                 <th>Name</th>
                 <th>Where</th>
                 <th>Value</th>
-                <th title="Freeze">❄</th>
+                <th>Freeze</th>
                 <th />
               </tr>
             </thead>
@@ -438,29 +441,32 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
                     />
                   </td>
                   <td>
-                    <Toggle checked={e.frozen} disabled={e.value == null} onChange={(on) => setFrozen(e, on)} />
+                    <OnOff label={`Freeze ${e.label}`} on={e.frozen} disabled={e.value == null} onChange={(on) => setFrozen(e, on)} />
                   </td>
                   <td>
                     <div className={styles.actions}>
                       <button
-                        className={`btn ${styles.small}`}
+                        className="ag-btn ag-btn--sm"
                         disabled={finding !== null}
                         title="Find a path that still works after the game restarts"
                         onClick={() => findPointers(e)}
                       >
-                        {finding === e.key ? "Searching…" : "Pointers"}
+                        <Icon name="link" />
+                        {finding === e.key ? "Searching" : "Pointers"}
                       </button>
-                      <button className={`btn btn-primary ${styles.small}`} onClick={() => setSaving(e)}>
+                      <button className="ag-btn ag-btn--primary ag-btn--sm" onClick={() => setSaving(e)}>
+                        <Icon name="save" />
                         Save as cheat
                       </button>
                       <button
-                        className={`btn btn-ghost ${styles.small}`}
+                        className="ag-icon-btn"
+                        aria-label={`Remove ${e.label}`}
                         onClick={async () => {
                           if (e.frozen) await api.scanFreeze(e.key, e.path, e.type, null).catch(() => {});
                           s.removeEntry(e.key);
                         }}
                       >
-                        ✕
+                        <Icon name="close" />
                       </button>
                     </div>
                   </td>
@@ -473,7 +479,7 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
 
       {s.pointers && pointerOwner && (
         <>
-          <h3 className={styles.sectionTitle}>Pointer paths to “{pointerOwner.label}”</h3>
+          <h3 className="title">Pointer paths to “{pointerOwner.label}”</h3>
           <span className={styles.muted}>
             {s.pointers.paths.length} found, best first. Pick one with <strong>Use</strong>. To be sure it survives
             a restart: restart the game, attach again, find the value again, add it to the list, then re-check
@@ -481,7 +487,7 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
           </span>
           <div className={styles.row}>
             <select value={recheckWith} onChange={(e) => setRecheckWith(e.target.value)}>
-              <option value="">Re-check against…</option>
+              <option value="">Re-check against</option>
               {s.watch
                 .filter((w) => w.key !== pointerOwner.key)
                 .map((w) => (
@@ -490,7 +496,7 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
                   </option>
                 ))}
             </select>
-            <button className="btn" disabled={!recheckWith} onClick={recheck}>
+            <button className="ag-btn" disabled={!recheckWith} onClick={recheck}>
               Keep paths that still work
             </button>
           </div>
@@ -502,7 +508,7 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
                     <td className={styles.mono}>{p.display}</td>
                     <td>
                       <button
-                        className={`btn ${styles.small}`}
+                        className="ag-btn ag-btn--sm"
                         onClick={() => {
                           s.updateEntry(pointerOwner.key, { path: p.path });
                           push("Path set. Save as cheat when you're happy with it.", "success");
@@ -593,10 +599,10 @@ function SaveCheatDialog({ entry, game, onClose }: { entry: WatchEntry; game: Ga
   return (
     <div className={styles.dialog} onClick={onClose}>
       <div className={styles.dialogBody} onClick={(e) => e.stopPropagation()}>
-        <h3>Save as cheat</h3>
+        <h3 className="display-md">Save as cheat</h3>
         {!isStatic(entry.path) && (
-          <div className={styles.disclaimer}>
-            This is a heap address, so it will move when the game restarts. Use <strong>Pointers</strong> first to get
+          <div className={styles.note}>
+            <span className={styles.errorWord}>Heads up</span> This is a heap address, so it will move when the game restarts. Use <strong>Pointers</strong> first to get
             a path that lasts.
           </div>
         )}
@@ -607,8 +613,8 @@ function SaveCheatDialog({ entry, game, onClose }: { entry: WatchEntry; game: Ga
         <label className={styles.field}>
           <span>Type of cheat</span>
           <select value={kind} onChange={(e) => setKind(e.target.value as "freeze" | "set")}>
-            <option value="freeze">Toggle: keep it at a value (Unlimited …)</option>
-            <option value="set">Number box: set it to anything (Set …)</option>
+            <option value="freeze">Off/On: keep it at a value (Unlimited health)</option>
+            <option value="set">Number box: set it to anything (Set gold)</option>
           </select>
         </label>
         <label className={styles.field}>
@@ -629,7 +635,7 @@ function SaveCheatDialog({ entry, game, onClose }: { entry: WatchEntry; game: Ga
         )}
         <label className={styles.field}>
           <span>Hotkey (optional)</span>
-          <input value={hotkey} placeholder="F1, Ctrl+F2, …" onChange={(e) => setHotkey(e.target.value)} />
+          <input value={hotkey} placeholder="F1 or Ctrl+F2" onChange={(e) => setHotkey(e.target.value)} />
         </label>
         <label className={styles.field}>
           <span>Add to trainer</span>
@@ -643,10 +649,10 @@ function SaveCheatDialog({ entry, game, onClose }: { entry: WatchEntry; game: Ga
           </select>
         </label>
         <div className={styles.row}>
-          <button className="btn btn-primary" disabled={!name.trim() || value.trim() === ""} onClick={save}>
+          <button className="ag-btn ag-btn--primary" disabled={!name.trim() || value.trim() === ""} onClick={save}>
             Save
           </button>
-          <button className="btn btn-ghost" onClick={onClose}>
+          <button className="ag-btn ag-btn--ghost" onClick={onClose}>
             Cancel
           </button>
         </div>

@@ -1,7 +1,8 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GameRow } from "../api/db";
-import LauncherBadge from "./LauncherBadge";
 import { Launcher } from "../api/tauri";
+import LauncherBadge from "./LauncherBadge";
 import styles from "./GameCard.module.css";
 
 interface Props {
@@ -12,6 +13,7 @@ interface Props {
 export default function GameCard({ game, hasTrainer = false }: Props) {
   const navigate = useNavigate();
   const initial = game.name.trim().charAt(0).toUpperCase() || "?";
+  const [coverFailed, setCoverFailed] = useState(false);
 
   return (
     <button
@@ -20,22 +22,19 @@ export default function GameCard({ game, hasTrainer = false }: Props) {
       title={game.name}
     >
       <div className={styles.cover}>
-        {game.cover_url ? (
-          <img src={game.cover_url} alt={game.name} loading="lazy" />
+        {game.cover_url && !coverFailed ? (
+          <img src={game.cover_url} alt="" loading="lazy" onError={() => setCoverFailed(true)} />
         ) : (
-          <div className={styles.placeholder}>
+          <div className={`${styles.placeholder} ag-grain`} aria-hidden="true">
             <span>{initial}</span>
           </div>
         )}
-        <div className={styles.gradient} />
-        <div className={styles.topRow}>
-          <LauncherBadge launcher={game.launcher as Launcher} />
-        </div>
-        <div className={styles.pills}>
-          {hasTrainer && <span className={`${styles.pill} ${styles.trainer}`}>Trainer</span>}
-        </div>
+        {hasTrainer && <span className={`ag-chip ag-chip--ink ${styles.trainer}`}>Trainer</span>}
       </div>
-      <div className={styles.title}>{game.name}</div>
+      <div className={styles.meta}>
+        <span className={styles.title}>{game.name}</span>
+        <LauncherBadge launcher={game.launcher as Launcher} />
+      </div>
     </button>
   );
 }

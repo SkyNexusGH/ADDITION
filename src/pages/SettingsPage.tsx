@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { dbq } from "../api/db";
 import { api } from "../api/tauri";
 import { useToast } from "../store/toast";
+import Icon from "../components/Icon";
+import { OnOff } from "./tabs/TrainerTab";
 import styles from "./SettingsPage.module.css";
 
 interface SettingsState {
@@ -41,11 +43,14 @@ export default function SettingsPage() {
 
   return (
     <div className={styles.page}>
-      <h1 className={styles.title}>Settings</h1>
+      <header className={styles.header}>
+        <span className="label-caps">ADDITION</span>
+        <h1 className="display-md">Settings</h1>
+      </header>
 
-      <Section title="Cover art" subtitle="Covers come from Steam's CDN by default. No key needed.">
+      <Section title="Cover art" subtitle="Covers come from Steam by default. No key needed.">
         <Field
-          label="SteamGridDB API Key (optional)"
+          label="SteamGridDB key (optional)"
           help="Only needed for higher-quality community covers."
         >
           <input
@@ -57,35 +62,32 @@ export default function SettingsPage() {
       </Section>
 
       <Section title="Storage" subtitle="Your trainers live here as plain JSON files.">
-        <div className={styles.muted}>
-          <strong>Trainers folder:</strong> {appData ? `${appData}/trainers` : "(not yet initialized)"}
+        <div className={styles.pathRow}>
+          <span className="label-caps">Trainers folder</span>
+          <code className={styles.path}>{appData ? `${appData}/trainers` : "Not set up yet"}</code>
         </div>
         {appData && (
-          <button className="btn" onClick={() => api.openPath(`${appData}/trainers`)}>
-            Open trainers folder
+          <button className="ag-btn" onClick={() => api.openPath(`${appData}/trainers`)}>
+            <Icon name="folder" />
+            Open folder
           </button>
         )}
       </Section>
 
-      <Section title="App" subtitle="Behaviour preferences.">
-        <label className={styles.toggleRow}>
-          <input
-            type="checkbox"
-            checked={s.startup}
-            onChange={(e) => setS({ ...s, startup: e.target.checked })}
-          />
-          <span>Launch ADDITION on system startup</span>
-        </label>
-        <div className={styles.muted}>
-          <strong>Theme:</strong> Dark · MVP only
+      <Section title="App">
+        <div className={styles.toggleRow}>
+          <span>Start ADDITION with Windows</span>
+          <OnOff label="Start with Windows" on={s.startup} onChange={(on) => setS({ ...s, startup: on })} />
         </div>
       </Section>
 
-      <button className="btn btn-primary" onClick={onSave}>Save settings</button>
+      <button className={`ag-btn ag-btn--primary ${styles.save}`} onClick={onSave}>
+        Save
+      </button>
 
       <div className={styles.privacy}>
-        <strong>Privacy.</strong> ADDITION sends zero telemetry and has no accounts or time
-        limits. The only outbound requests are for cover art.
+        <span className="label-caps">Privacy</span>
+        <p>No telemetry, no account, no time limit. The only requests ADDITION makes online are for cover art.</p>
       </div>
     </div>
   );
@@ -103,7 +105,7 @@ function Section({
   return (
     <section className={styles.section}>
       <header>
-        <h2>{title}</h2>
+        <h2 className="title">{title}</h2>
         {subtitle && <p>{subtitle}</p>}
       </header>
       <div className={styles.body}>{children}</div>

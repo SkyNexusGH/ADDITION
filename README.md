@@ -109,4 +109,4 @@ There is no telemetry, no account and no time limit. The only outbound requests 
 
 ## License
 
-MIT, see `LICENSE`. The Lato font is bundled under the SIL Open Font License ([public/assets/fonts/OFL.txt](public/assets/fonts/OFL.txt)).
+MIT, see `LICENSE`. The UI uses the Afterglow design system. Its typefaces (Unbounded, Manrope and JetBrains Mono) are bundled from Fontsource under the SIL Open Font License.

@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 72px 1fr;
   height: 100vh;
-  background: var(--bg-base);
+  background: var(--surface-100);
 }
 
 .main {
@@ -10,13 +10,11 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
-  background:
-    radial-gradient(900px 500px at 75% -10%, rgba(59, 130, 246, 0.06), transparent 70%),
-    var(--bg-base);
+  min-width: 0;
 }
 
 .content {
   flex: 1;
   overflow: auto;
-  padding: var(--space-6) var(--space-8);
+  padding: var(--space-5) var(--space-6) var(--space-6);
 }
