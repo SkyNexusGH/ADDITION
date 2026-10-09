@@ -1,38 +1,26 @@
 .card {
   display: flex;
   flex-direction: column;
-  background: transparent;
-  border: none;
+  gap: var(--space-3);
   padding: 0;
   text-align: left;
-  cursor: pointer;
-  transition: transform var(--transition);
-}
-
-.card:hover {
-  transform: translateY(-4px);
+  border-radius: var(--radius-md);
 }
 
 .cover {
   position: relative;
-  width: 100%;
-  aspect-ratio: 600 / 900;
+  aspect-ratio: 2 / 3;
   border-radius: var(--radius-md);
   overflow: hidden;
-  background: var(--bg-elevated);
-  box-shadow:
-    0 12px 32px rgba(0, 0, 0, 0.55),
-    0 0 0 1px rgba(255, 255, 255, 0.04) inset;
-  transition: box-shadow var(--transition), outline-color var(--transition);
-  outline: 1px solid transparent;
+  background: var(--surface-300);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-node);
+  transition: box-shadow var(--transition), border-color var(--transition);
 }
 
 .card:hover .cover {
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.65),
-    0 0 32px rgba(59, 130, 246, 0.45),
-    0 0 0 1px rgba(96, 165, 250, 0.4) inset;
-  outline-color: rgba(96, 165, 250, 0.6);
+  border-color: var(--violet);
+  box-shadow: var(--shadow-node), var(--glow-violet);
 }
 
 .cover img {
@@ -42,76 +30,43 @@
   display: block;
 }
 
+/* No cover art: a small cobalt light field instead of a flat block. */
 .placeholder {
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
-  background:
-    radial-gradient(220px 220px at 50% 30%, rgba(59, 130, 246, 0.18), transparent 70%),
-    linear-gradient(135deg, #0d1220 0%, #1a2540 100%);
-  position: relative;
+  background: radial-gradient(120% 90% at 50% 0%, var(--void) 0 22%, var(--cobalt) 82%, var(--violet-soft) 100%);
+  --grain: 0.2;
 }
 
 .placeholder span {
-  font-size: 72px;
-  font-weight: 900;
-  color: var(--accent-bright);
-  text-shadow: 0 0 32px rgba(59, 130, 246, 0.6);
-  letter-spacing: 0.04em;
-}
-
-.gradient {
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 50%;
-  background: linear-gradient(to top, rgba(8, 12, 20, 0.85), transparent);
-  pointer-events: none;
-}
-
-.topRow {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  gap: 4px;
-}
-
-.pills {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
-  display: flex;
-  gap: 4px;
-  flex-wrap: wrap;
-}
-
-.pill {
-  padding: 3px 8px;
-  border-radius: 999px;
-  font-size: 10px;
-  font-weight: 700;
-  background: rgba(8, 12, 20, 0.75);
-  color: var(--accent-bright);
-  backdrop-filter: blur(6px);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  border: 1px solid rgba(96, 165, 250, 0.25);
+  position: relative;
+  z-index: 1;
+  font: 600 56px/1 var(--font-display);
+  color: var(--on-cobalt);
 }
 
 .trainer {
-  color: var(--success);
-  border-color: rgba(34, 197, 94, 0.4);
+  position: absolute;
+  left: var(--space-2);
+  bottom: var(--space-2);
+  z-index: 3;
+}
+
+.meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  min-width: 0;
 }
 
 .title {
-  margin-top: var(--space-3);
-  font-weight: 700;
-  font-size: 13px;
-  color: var(--text-primary);
+  max-width: 100%;
+  font: 600 15px/22px var(--font-sans);
+  color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  letter-spacing: 0.01em;
 }

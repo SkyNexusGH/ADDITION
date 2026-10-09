@@ -63,15 +63,23 @@ pub fn migrations() -> Vec<Migration> {
             "#,
             kind: MigrationKind::Up,
         },
+        Migration {
+            version: 2,
+            description: "drop mod manager tables",
+            sql: r#"
+                DROP TABLE IF EXISTS installed_mods;
+                DROP TABLE IF EXISTS backups;
+                DROP TABLE IF EXISTS mod_cache;
+            "#,
+            kind: MigrationKind::Up,
+        },
     ]
 }
 
 pub fn ensure_app_dirs(app: &mut tauri::App) -> Result<(), Box<dyn std::error::Error>> {
     let dir = app.path().app_data_dir()?;
     std::fs::create_dir_all(&dir).ok();
-    std::fs::create_dir_all(dir.join("backups")).ok();
-    std::fs::create_dir_all(dir.join("staging")).ok();
-    std::fs::create_dir_all(dir.join("downloads")).ok();
+    std::fs::create_dir_all(dir.join("trainers")).ok();
     Ok(())
 }
 

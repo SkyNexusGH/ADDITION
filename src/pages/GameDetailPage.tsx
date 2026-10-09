@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate, Routes, Route, NavLink, Navigate } from "react-router-dom";
 import { dbq, GameRow } from "../api/db";
 import { api, Launcher } from "../api/tauri";
+import Icon from "../components/Icon";
 import LauncherBadge from "../components/LauncherBadge";
-import ModsTab from "./tabs/ModsTab";
-import TrainersTab from "./tabs/TrainersTab";
-import InstalledTab from "./tabs/InstalledTab";
+import LightPlane from "../components/LightPlane";
 import GameSettingsTab from "./tabs/GameSettingsTab";
+import TrainerTab from "./tabs/TrainerTab";
+import ScannerTab from "./tabs/ScannerTab";
 import { useToast } from "../store/toast";
 import styles from "./GameDetailPage.module.css";
 
@@ -15,6 +16,7 @@ export default function GameDetailPage() {
   const navigate = useNavigate();
   const push = useToast((s) => s.push);
   const [game, setGame] = useState<GameRow | null>(null);
+  const [coverFailed, setCoverFailed] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -25,17 +27,20 @@ export default function GameDetailPage() {
     if (!game) return;
     try {
       await api.launchGame(game.launcher as Launcher, game.app_id, game.exe_path);
-      push(`Launching ${game.name}…`, "info");
+      push(`Starting ${game.name}`, "info");
     } catch (e: any) {
-      push(`Launch failed: ${e?.toString?.() ?? "unknown error"}`, "danger");
+      push(`Couldn't start the game: ${e?.toString?.() ?? "unknown error"}`, "danger");
     }
   };
 
   if (!game) {
     return (
       <div className={styles.empty}>
-        <p>Loading game…</p>
-        <button className="btn" onClick={() => navigate("/library")}>← Back to Library</button>
+        <p>Loading game</p>
+        <button className="ag-btn" onClick={() => navigate("/library")}>
+          <Icon name="back" />
+          Library
+        </button>
       </div>
     );
   }
@@ -44,71 +49,59 @@ export default function GameDetailPage() {
 
   return (
     <div className={styles.page}>
-      <div className={styles.hero}>
-        {game.cover_url && (
-          <div
-            className={styles.heroBlur}
-            style={{ backgroundImage: `url(${game.cover_url})` }}
-          />
-        )}
-        <div className={styles.heroOverlay} />
-        <button className={styles.backBtn} onClick={() => navigate("/library")}>
-          ← Library
+      <section className={styles.hero}>
+        <LightPlane className={styles.heroLight} start={64} />
+        <button className={`ag-btn ag-btn--sm ${styles.back}`} onClick={() => navigate("/library")}>
+          <Icon name="back" />
+          Library
         </button>
         <div className={styles.heroBody}>
           <div className={styles.cover}>
-            {game.cover_url ? (
-              <img src={game.cover_url} alt={game.name} />
+            {game.cover_url && !coverFailed ? (
+              <img src={game.cover_url} alt="" onError={() => setCoverFailed(true)} />
             ) : (
-              <div className={styles.coverPlaceholder}>{initial}</div>
+              <div className={`${styles.coverPlaceholder} ag-grain`} aria-hidden="true">
+                {initial}
+              </div>
             )}
           </div>
           <div className={styles.titleBlock}>
             <LauncherBadge launcher={game.launcher as Launcher} />
-            <h1 className={styles.title}>{game.name}</h1>
+            <h1 className={`display-lg ${styles.title}`}>{game.name}</h1>
             <div className={styles.path} title={game.install_path}>
               {game.install_path}
             </div>
             <div className={styles.actions}>
-              <button className={styles.bigPlay} onClick={onLaunch}>
-                ▶ Play
+              <button className="ag-btn ag-btn--ember ag-btn--lg" onClick={onLaunch}>
+                <Icon name="play" />
+                Play
               </button>
-              <button
-                className="btn"
-                onClick={() => api.openPath(game.install_path)}
-              >
-                Open Folder
+              <button className="ag-btn ag-btn--lg" onClick={() => api.openPath(game.install_path)}>
+                <Icon name="folder" />
+                Open folder
               </button>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className={styles.tabs}>
+      <nav className={`ag-seg ${styles.tabs}`} aria-label="Game sections">
         {[
-          { to: "mods", label: "Mods" },
-          { to: "trainers", label: "Trainers" },
-          { to: "installed", label: "Installed" },
+          { to: "trainer", label: "Trainer" },
+          { to: "scanner", label: "Scanner" },
           { to: "settings", label: "Settings" },
         ].map((t) => (
-          <NavLink
-            key={t.to}
-            to={t.to}
-            className={({ isActive }) =>
-              `${styles.tab} ${isActive ? styles.tabActive : ""}`
-            }
-          >
+          <NavLink key={t.to} to={t.to} className={({ isActive }) => `${styles.tab} ${isActive ? "is-on" : ""}`}>
             {t.label}
           </NavLink>
         ))}
-      </div>
+      </nav>
 
       <div className={styles.tabContent}>
         <Routes>
-          <Route path="/" element={<Navigate to="mods" replace />} />
-          <Route path="mods" element={<ModsTab game={game} />} />
-          <Route path="trainers" element={<TrainersTab game={game} />} />
-          <Route path="installed" element={<InstalledTab game={game} />} />
+          <Route path="/" element={<Navigate to="trainer" replace />} />
+          <Route path="trainer" element={<TrainerTab game={game} />} />
+          <Route path="scanner" element={<ScannerTab game={game} />} />
           <Route path="settings" element={<GameSettingsTab game={game} />} />
         </Routes>
       </div>

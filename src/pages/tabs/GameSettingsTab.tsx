@@ -18,8 +18,8 @@ export default function GameSettingsTab({ game }: { game: GameRow }) {
 
   return (
     <div className={styles.tab}>
-      <section className={styles.formSection}>
-        <h3 className={styles.sectionTitle}>Per-game settings</h3>
+      <section className={`${styles.panel} ${styles.formSection}`}>
+        <h3 className="title">Per-game settings</h3>
         <label className={styles.field}>
           <span>Launch arguments</span>
           <input
@@ -37,7 +37,7 @@ export default function GameSettingsTab({ game }: { game: GameRow }) {
           <span>Launcher</span>
           <input type="text" value={game.launcher} readOnly />
         </label>
-        <button className="btn btn-primary" onClick={save}>Save</button>
+        <button className="ag-btn ag-btn--primary" onClick={save}>Save</button>
       </section>
     </div>
   );

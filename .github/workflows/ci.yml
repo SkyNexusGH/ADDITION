@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  engine-linux:
+    name: Engine tests (Linux)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - run: cargo test -p addition-engine
+
+  windows:
+    name: Engine tests + installer (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: i686-pc-windows-msvc
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Engine tests, 64-bit game
+        run: cargo test -p addition-engine
+
+      # Many older games (Plants vs. Zombies included) are 32-bit.
+      - name: Engine tests, 32-bit game
+        shell: bash
+        run: |
+          cargo build -p addition-engine --bin test-game --target i686-pc-windows-msvc
+          ADDITION_TEST_GAME="$PWD/target/i686-pc-windows-msvc/debug/test-game.exe" \
+            cargo test -p addition-engine --test test_game
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - name: Build installer
+        run: npx tauri build
+      - name: Build test game
+        run: cargo build --release -p addition-engine --bin test-game
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ADDITION-windows
+          path: |
+            target/release/bundle/msi/*.msi
+            target/release/bundle/nsis/*.exe
+            target/release/test-game.exe

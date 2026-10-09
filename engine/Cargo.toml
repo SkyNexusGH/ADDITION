@@ -1,0 +1,27 @@
+[package]
+name = "addition-engine"
+version = "0.1.0"
+description = "Process memory engine for ADDITION trainers: attach, scan, pointer chains, patches, freezes"
+edition = "2021"
+rust-version = "1.77"
+publish = false
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1"
+
+[target."cfg(windows)".dependencies]
+windows-sys = { version = "0.59", features = [
+    "Win32_Foundation",
+    "Win32_System_Threading",
+    "Win32_System_Memory",
+    "Win32_System_Diagnostics_Debug",
+    "Win32_System_Diagnostics_ToolHelp",
+    "Win32_System_ProcessStatus",
+] }
+
+# A tiny fake "game" used by the integration tests and for trying the app out.
+[[bin]]
+name = "test-game"
+path = "src/bin/test-game.rs"

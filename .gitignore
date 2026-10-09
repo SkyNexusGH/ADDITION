@@ -14,7 +14,8 @@ dist-ssr/
 *.sln
 *.sw?
 
-# Tauri
+# Rust
+/target/
 src-tauri/target/
 src-tauri/gen/
 # Cargo.lock IS committed for binary applications (this one).
