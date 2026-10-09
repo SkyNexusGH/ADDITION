@@ -9,6 +9,8 @@ use serde::Serialize;
 pub struct ProcessInfo {
     pub pid: u32,
     pub name: String,
+    /// Process that started this one (0 if unknown).
+    pub parent_pid: u32,
 }
 
 /// A loaded executable image (the game .exe or a .dll).

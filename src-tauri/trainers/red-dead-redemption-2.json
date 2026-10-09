@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "id": "red-dead-redemption-2",
+  "game": "Red Dead Redemption 2",
+  "process": ["RDR2.exe"],
+  "game_version": "Steam build 13773296",
+  "author": "ADDITION",
+  "notes": "Story Mode only. Never use this in Red Dead Online: close the trainer before going online, or Rockstar can ban your account. No cheats yet: find them with the Scanner while you play. Money is shown in dollars but may be stored in cents (as an i32), so $12.50 can be 1250 in memory. Health and Dead Eye cores are likely f32.",
+  "verified": false,
+  "cheats": []
+}

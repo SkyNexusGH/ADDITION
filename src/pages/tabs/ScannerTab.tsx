@@ -117,10 +117,17 @@ function ProcessPicker({ game, onError }: { game: GameRow; onError: (e: string |
       .catch(() => setHints([basename(game.exe_path) ?? ""].filter(Boolean)));
   }, [game.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const suggested = useMemo(
-    () => procs.find((p) => hints.some((h) => h.toLowerCase() === p.name.toLowerCase())),
-    [procs, hints],
-  );
+  // Same rule as the engine's pick_process: earlier hints win, and among
+  // same-named processes prefer the one a launcher of that name started.
+  const suggested = useMemo(() => {
+    for (const h of hints) {
+      const matches = procs.filter((p) => p.name.toLowerCase() === h.toLowerCase());
+      if (matches.length) {
+        return matches.find((p) => matches.some((q) => q.pid === p.parent_pid && q.pid !== p.pid)) ?? matches[0];
+      }
+    }
+    return undefined;
+  }, [procs, hints]);
   useEffect(() => {
     if (pick === "" && suggested) setPick(suggested.pid);
   }, [suggested]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -373,7 +380,13 @@ function WatchPanel({ game, push }: { game: GameRow; push: (m: string, v?: any) 
   const findPointers = async (e: WatchEntry) => {
     setFinding(e.key);
     try {
-      const paths = await api.scanFindPointers(e.address);
+      let paths = await api.scanFindPointers(e.address);
+      // Engines with managed heaps (Unity, RE Engine) keep values more than
+      // four pointers away from the .exe, so look deeper before giving up.
+      if (!paths.length) {
+        push("No short paths. Searching deeper, this can take a minute.", "info");
+        paths = await api.scanFindPointers(e.address, 6);
+      }
       s.set({ pointers: { key: e.key, paths } });
       if (!paths.length) push("No pointer paths found. Try again from a different point in the game.", "warning");
     } catch (err) {

@@ -70,7 +70,11 @@ pub fn list_processes() -> Result<Vec<ProcessInfo>> {
     e.dwSize = size_of::<PROCESSENTRY32W>() as u32;
     let mut ok = unsafe { Process32FirstW(snap.0, &mut e) };
     while ok != 0 {
-        out.push(ProcessInfo { pid: e.th32ProcessID, name: wide_to_string(&e.szExeFile) });
+        out.push(ProcessInfo {
+            pid: e.th32ProcessID,
+            name: wide_to_string(&e.szExeFile),
+            parent_pid: e.th32ParentProcessID,
+        });
         ok = unsafe { Process32NextW(snap.0, &mut e) };
     }
     Ok(out)

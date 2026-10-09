@@ -1,0 +1,12 @@
+{
+  "schema": 1,
+  "id": "hogwarts-legacy",
+  "game": "Hogwarts Legacy",
+  "aliases": ["Hogwarts Legacy Deluxe Edition"],
+  "process": ["HogwartsLegacy.exe"],
+  "game_version": "Steam build 20773316",
+  "author": "ADDITION",
+  "notes": "No cheats yet: find them with the Scanner while you play. Good first targets: Gold (i32, shown in the gear menu; spend some at a shop and scan again), Health (f32; take a hit, scan Decreased) and Talent Points (i32). Unreal Engine games usually give a pointer path from HogwartsLegacy.exe that survives restarts. Steam starts a small launcher with the same name; ADDITION attaches to the real game.",
+  "verified": false,
+  "cheats": []
+}

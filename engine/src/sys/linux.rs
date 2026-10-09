@@ -18,8 +18,14 @@ pub fn list_processes() -> Result<Vec<ProcessInfo>> {
             .ok()
             .and_then(|p| p.file_name().map(|n| n.to_string_lossy().into_owned()))
             .or_else(|| fs::read_to_string(entry.path().join("comm")).ok().map(|s| s.trim().to_string()));
+        // `stat` is "pid (comm) state ppid ..."; comm may contain spaces, so
+        // split after the closing parenthesis.
+        let parent_pid = fs::read_to_string(entry.path().join("stat"))
+            .ok()
+            .and_then(|s| s.rsplit_once(')').and_then(|(_, rest)| rest.split_whitespace().nth(1)?.parse().ok()))
+            .unwrap_or(0);
         if let Some(name) = name {
-            out.push(ProcessInfo { pid, name });
+            out.push(ProcessInfo { pid, name, parent_pid });
         }
     }
     Ok(out)

@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "id": "mad-games-tycoon-2",
+  "game": "Mad Games Tycoon 2",
+  "process": ["Mad Games Tycoon 2.exe"],
+  "game_version": "Steam build 20855306",
+  "author": "ADDITION",
+  "notes": "No cheats yet: find them with the Scanner while you play. Money is the easy one: pause, note it, unpause until it changes, scan again. If i32 finds nothing, try i64, then f32. This is a Unity game, so pointer paths go through UnityPlayer.dll or mono-2.0-bdwgc.dll and are long; Pointers searches deeper automatically when short paths fail. Re-check them after a restart before trusting them.",
+  "verified": false,
+  "cheats": []
+}

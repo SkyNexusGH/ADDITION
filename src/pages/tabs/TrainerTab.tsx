@@ -113,6 +113,13 @@ export default function TrainerTab({ game }: { game: GameRow }) {
         </p>
       ) : null}
 
+      {mine.cheats.length === 0 && (
+        <p className={styles.note}>
+          No cheats yet. Start the game, find a value in the <Link to="../scanner">Scanner</Link> tab, and use{" "}
+          <strong>Save as cheat</strong> to add it here.
+        </p>
+      )}
+
       <div className={styles.cheatList}>
         {mine.cheats.map((c) => (
           <CheatRow

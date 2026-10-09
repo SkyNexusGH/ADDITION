@@ -88,6 +88,7 @@ export interface HostStatus {
 export interface ProcessInfo {
   pid: number;
   name: string;
+  parent_pid: number;
 }
 
 export type ScanFilter =

@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "id": "slaves-of-rome",
+  "game": "Slaves of Rome",
+  "process": ["SlavesOfRome-Win64-Shipping.exe"],
+  "game_version": "Steam build 25103133",
+  "author": "ADDITION",
+  "notes": "No cheats yet: find them with the Scanner while you play. Start with your money or a resource you can see on screen: note it, change it in game, scan again. Try i32 first, then f32. The game runs as SlavesOfRome-Win64-Shipping.exe (the small SlavesOfRome.exe is only its launcher), and pointer paths should start from the Shipping .exe.",
+  "verified": false,
+  "cheats": []
+}

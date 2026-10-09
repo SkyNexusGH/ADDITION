@@ -49,7 +49,7 @@ mod tests {
 
     #[test]
     fn detects() {
-        let procs = vec![ProcessInfo { pid: 1, name: "EasyAntiCheat.exe".into() }];
+        let procs = vec![ProcessInfo { pid: 1, name: "EasyAntiCheat.exe".into(), parent_pid: 0 }];
         assert_eq!(detect_in_processes(&procs), Some("Easy Anti-Cheat"));
         let mods = vec![Module { name: "BEClient_x64.dll".into(), base: 0, size: 1 }];
         assert_eq!(detect_in_modules(&mods), Some("BattlEye"));

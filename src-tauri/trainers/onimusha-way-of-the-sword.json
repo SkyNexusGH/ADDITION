@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "id": "onimusha-way-of-the-sword",
+  "game": "Onimusha: Way of the Sword",
+  "process": ["OnimushaWotS.exe"],
+  "game_version": "Steam build 24769601",
+  "author": "ADDITION",
+  "notes": "No cheats yet: find them with the Scanner while you play. Health is likely a decimal: scan f32 with Unknown initial value, take a hit, scan Decreased, heal, scan Increased. Try currency or souls you can see on screen with i32. This is a Capcom RE Engine game: values sit far from the .exe, so pointer paths are long (Pointers searches deeper automatically) and must be re-checked after a restart.",
+  "verified": false,
+  "cheats": []
+}

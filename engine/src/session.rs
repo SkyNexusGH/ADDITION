@@ -16,11 +16,21 @@ use std::sync::Arc;
 /// Finds a running process by executable name (case-insensitive). Earlier
 /// names win, so a trainer can list the real game before its launcher.
 pub fn find_process(names: &[String]) -> Result<Option<ProcessInfo>> {
-    let procs = sys::list_processes()?;
-    Ok(names
-        .iter()
-        .find_map(|n| procs.iter().find(|p| n.eq_ignore_ascii_case(&p.name)))
-        .cloned())
+    Ok(pick_process(&sys::list_processes()?, names).cloned())
+}
+
+/// Some launchers share the game's exe name (Hogwarts Legacy runs a small
+/// `HogwartsLegacy.exe` that starts the real `HogwartsLegacy.exe`). When a
+/// name matches several processes, prefer the one started by another match.
+pub fn pick_process<'a>(procs: &'a [ProcessInfo], names: &[String]) -> Option<&'a ProcessInfo> {
+    names.iter().find_map(|n| {
+        let matches: Vec<&ProcessInfo> = procs.iter().filter(|p| n.eq_ignore_ascii_case(&p.name)).collect();
+        matches
+            .iter()
+            .find(|p| matches.iter().any(|q| q.pid == p.parent_pid && q.pid != p.pid))
+            .or(matches.first())
+            .copied()
+    })
 }
 
 pub fn list_processes() -> Result<Vec<ProcessInfo>> {
@@ -265,5 +275,33 @@ impl Drop for Session {
         if self.mem.is_alive() {
             self.disable_all();
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn p(pid: u32, name: &str, parent_pid: u32) -> ProcessInfo {
+        ProcessInfo { pid, name: name.into(), parent_pid }
+    }
+
+    #[test]
+    fn picks_game_over_same_name_launcher() {
+        let names = vec!["HogwartsLegacy.exe".to_string()];
+        // Launcher (pid 10) listed first, the real game (pid 20) is its child.
+        let procs = vec![p(10, "HogwartsLegacy.exe", 1), p(20, "HogwartsLegacy.exe", 10)];
+        assert_eq!(pick_process(&procs, &names).unwrap().pid, 20);
+        let procs = vec![p(20, "HogwartsLegacy.exe", 10), p(10, "HogwartsLegacy.exe", 1)];
+        assert_eq!(pick_process(&procs, &names).unwrap().pid, 20);
+    }
+
+    #[test]
+    fn earlier_names_win() {
+        let names = vec!["Game-Win64-Shipping.exe".to_string(), "Game.exe".to_string()];
+        let procs = vec![p(10, "Game.exe", 1), p(20, "game-win64-shipping.exe", 10)];
+        assert_eq!(pick_process(&procs, &names).unwrap().pid, 20);
+        assert_eq!(pick_process(&procs[..1], &names).unwrap().pid, 10);
+        assert!(pick_process(&[], &names).is_none());
     }
 }

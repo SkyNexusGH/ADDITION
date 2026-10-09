@@ -10,6 +10,15 @@ use std::path::{Path, PathBuf};
 const BUNDLED: &[(&str, &str)] = &[
     ("pvz-goty-steam.json", include_str!("../trainers/pvz-goty-steam.json")),
     ("pvz-original.json", include_str!("../trainers/pvz-original.json")),
+    // Starters: the right process and scanning tips, cheats still to be found.
+    ("beamng-drive.json", include_str!("../trainers/beamng-drive.json")),
+    ("hogwarts-legacy.json", include_str!("../trainers/hogwarts-legacy.json")),
+    ("mad-games-tycoon-2.json", include_str!("../trainers/mad-games-tycoon-2.json")),
+    ("mad-television-tycoon.json", include_str!("../trainers/mad-television-tycoon.json")),
+    ("onimusha-way-of-the-sword.json", include_str!("../trainers/onimusha-way-of-the-sword.json")),
+    ("red-dead-redemption-2.json", include_str!("../trainers/red-dead-redemption-2.json")),
+    ("slaves-of-rome.json", include_str!("../trainers/slaves-of-rome.json")),
+    ("teardown.json", include_str!("../trainers/teardown.json")),
 ];
 
 #[derive(Clone, Serialize)]

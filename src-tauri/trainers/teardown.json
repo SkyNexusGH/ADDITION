@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "id": "teardown",
+  "game": "Teardown",
+  "process": ["teardown.exe"],
+  "game_version": "Steam build 25295735",
+  "author": "ADDITION",
+  "notes": "No cheats yet: find them with the Scanner while you play. Campaign cash is shown in the hub (try i32, then f32). Health is usually a decimal, so scan f32 with Unknown initial value, take damage, scan Decreased. Ammo counts for tools are worth trying too. Values move when a level loads, so make a pointer path and re-check it after loading another mission.",
+  "verified": false,
+  "cheats": []
+}

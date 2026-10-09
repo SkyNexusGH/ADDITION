@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "id": "mad-television-tycoon",
+  "game": "Mad Television Tycoon",
+  "process": ["MadTelevisionTycoon-Win64-Shipping.exe"],
+  "game_version": "Steam build 25752538",
+  "author": "ADDITION",
+  "notes": "No cheats yet: find them with the Scanner while you play. Start with Money: note it, let it change, scan again. Try i32 first, then i64 or f32 if nothing turns up. The game runs as MadTelevisionTycoon-Win64-Shipping.exe (the small MadTelevisionTycoon.exe is only its launcher), and pointer paths should start from the Shipping .exe.",
+  "verified": false,
+  "cheats": []
+}

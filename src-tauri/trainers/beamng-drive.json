@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "id": "beamng-drive",
+  "game": "BeamNG.drive",
+  "process": ["BeamNG.drive.x64.exe"],
+  "game_version": "Steam build 24617469",
+  "author": "ADDITION",
+  "notes": "For Career mode, offline. No cheats yet: find them with the Scanner while you play. Career money is a good target: try f64 first, then f32 and i32. The game also has a built-in Lua console (~ key) for sandbox changes, which can be easier than memory editing.",
+  "verified": false,
+  "cheats": []
+}
